@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QFS.Helpers;
@@ -13,10 +14,12 @@ namespace QFS.Controllers
     {
 
         readonly IWegmansManager wegmansManager;
+        readonly IDatabaseManager databaseManager;
 
-        public ValuesController(IWegmansManager wegmansManager)
+        public ValuesController(IWegmansManager wegmansManager, IDatabaseManager databaseManager)
         {
             this.wegmansManager = wegmansManager;
+            this.databaseManager = databaseManager;
         }
 
         // GET api/values
@@ -40,6 +43,25 @@ namespace QFS.Controllers
         }
 
 
+        // GET api/values/GetAllLocations
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("[action]")]
+        public ActionResult<IEnumerable<GroceryStorageLocation>> GetAllLocations()
+        {
+            SqlConnection connection = databaseManager.InitConnection();
+            List<GroceryStorageLocation> locations=databaseManager.GetAllLocations(connection);
+            return Ok(locations);
+        }
+
+        // POST api/values/PostItemToStorage
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("[action]")]
+        public ActionResult<IEnumerable<GroceryItem>> PostItemToStorage([FromBody] GroceryItem item)
+        {
+            return Ok();
+        }
 
 
     }

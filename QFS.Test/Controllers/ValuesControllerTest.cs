@@ -21,7 +21,7 @@ namespace QFS.Test.Controllers
         public void GetTest()
         {
             IConfiguration config = GetConfig();
-            ValuesController valuesController = new ValuesController(null);
+            ValuesController valuesController = new ValuesController(null, null);
 
             var result = valuesController.Get();
             Assert.IsNotNull(result);

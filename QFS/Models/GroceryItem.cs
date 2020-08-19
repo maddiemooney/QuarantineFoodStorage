@@ -15,8 +15,11 @@ namespace QFS.Models
 
         public string barcode { get; set; }
         public string sku { get; set; }
-        public string name { get; set; }
-        public DateTime buyDate { get; set; }
+        public string groceryname { get; set; }
+        public DateTime dateadded { get; set; }
+        public int quarantinelength { get; set; }
+        public bool alertexists { get; set; }
+        public int locationid { get; set; }
 
 
         //bool isAvailable?
@@ -24,7 +27,7 @@ namespace QFS.Models
 
         public override string ToString()
         {
-            return "barcode: " + this.barcode + "\nsku: " + this.sku + "\nname: " + this.name;
+            return "barcode: " + this.barcode + "\nsku: " + this.sku + "\nname: " + this.groceryname;
         }
 
 
