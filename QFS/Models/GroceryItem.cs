@@ -8,17 +8,14 @@ namespace QFS.Models
     public class GroceryItem
     {
 
-        public GroceryItem()
-        {
-
-        }
+        public GroceryItem(){}
 
         public string barcode { get; set; }
         public string sku { get; set; }
-        public string groceryname { get; set; }
+        public string name { get; set; }
         public DateTime dateadded { get; set; }
         public int quarantinelength { get; set; }
-        public bool alertexists { get; set; }
+        public int alertexists { get; set; }
         public int locationid { get; set; }
 
 
@@ -27,10 +24,7 @@ namespace QFS.Models
 
         public override string ToString()
         {
-            return "barcode: " + this.barcode + "\nsku: " + this.sku + "\nname: " + this.groceryname;
+            return "barcode: " + this.barcode + "\nsku: " + this.sku + "\nname: " + this.name;
         }
-
-
-
     }
 }

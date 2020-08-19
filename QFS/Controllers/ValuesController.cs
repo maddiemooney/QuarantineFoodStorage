@@ -30,16 +30,14 @@ namespace QFS.Controllers
             return Content("Beam me up, Scotty.");
         }
 
-        // GET api/values/GetSKU
-        [HttpGet]
+        // POST api/values/PostBarcodeGetItem
+        [HttpPost]
         [AllowAnonymous]
         [Route("[action]")]
-        public ActionResult<IEnumerable<string>> GetSKU()
+        public ActionResult<IEnumerable<GroceryItem>> PostBarcodeGetItem([FromBody] GroceryItem incompleteItem)
         {
-            GroceryItem item = wegmansManager.GetSKUFromBarcode("3700076213");
-            return Ok(item.ToString());
-
-            //change to post?
+            GroceryItem item = wegmansManager.GetSKUFromBarcode(incompleteItem.barcode);
+            return Ok(item);
         }
 
 
@@ -60,8 +58,12 @@ namespace QFS.Controllers
         [Route("[action]")]
         public ActionResult<IEnumerable<GroceryItem>> PostItemToStorage([FromBody] GroceryItem item)
         {
+            SqlConnection connection = databaseManager.InitConnection();
+            databaseManager.InsertGroceryItem(connection, item);
             return Ok();
         }
+
+
 
 
     }
